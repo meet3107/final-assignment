@@ -119,3 +119,14 @@ img {
 .Edit-Button {
   background-color: orangered;
 }
+.logintext{
+  color: red;
+}
+.login{
+  background-color: rgb(53, 52, 52);
+  border-radius: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}

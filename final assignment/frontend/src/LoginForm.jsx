@@ -22,7 +22,7 @@ export default function LoginUser() {
         const postUser = { ...user };
         await axios
         .post("http://localhost:3000/login", postUser)
-        .then((response) => setPostResponse(<p>{response.data}</p>))
+        .then((response) => setPostResponse(<p className="logintext">{response.data}</p>))
     };
 
     const postUser = async (evt) => {
@@ -35,9 +35,10 @@ export default function LoginUser() {
         });
     }
     return ( 
-        <div>
+        <div className="login">
+            <h1>Groceries App</h1>
             <form action="" onSubmit={postUser}>
-                <label htmlFor="username">Username</label>
+                <label htmlFor="username">Username </label>
                 <input 
                 type="text" 
                 name="username" 
@@ -46,8 +47,8 @@ export default function LoginUser() {
                 value={formData.username}
                 required 
                 />
-                <br />
-                <label htmlFor="password">Password</label>
+                <p></p>
+                <label htmlFor="password">Password </label>
                 <input 
                 type="password" 
                 name="password" 
@@ -58,6 +59,9 @@ export default function LoginUser() {
                 />
                 <br />
                 <button>Login</button>
+                
+                <p>not a member yet? click <a href="/create-user"> here</a> to join</p>
+               
             </form>
             {postResponse}
         </div>

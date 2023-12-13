@@ -89,9 +89,9 @@ server.post("/login", async (request, response) => {
           response.send(err);
         }
         if (res) {
-          response.send("Successful Login");
+         response.send("Successful Login");
         } else {
-          response.send("Bad authentication");
+          response.send("Bad username or password");
         }
       });
 
