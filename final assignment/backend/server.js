@@ -7,6 +7,7 @@ const User = require("./models/user");
 const cors = require("cors");
 require("dotenv/config");
 const port = 3000;
+const bcrypt = require("bcrypt");
 
 server.use(express.urlencoded({ extended: false }));
 server.use(express.json());
@@ -79,4 +80,24 @@ server.post("/register", async (request, response) => {
 
 ///////////////user verfication post
 
-server.post("/login");
+server.post("/login", async (request, response) => {
+  const { username, password } = request.body;
+  await User.findOne({ username }).then((user) => {
+    if (user) {
+      bcrypt.compare(password, user.password, (err, res) => {
+        if (err) {
+          response.send(err);
+        }
+        if (res) {
+          response.send("Successful Login");
+        } else {
+          response.send("Bad authentication");
+        }
+      });
+
+    }
+    else {
+      response.send("Username does not exist")
+    }
+  })
+});
