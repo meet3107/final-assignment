@@ -1,7 +1,8 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import GroceriesApp from "./GroceriesApp";
-import LoginForm from "./LoginForm"
+import LoginForm from "./LoginForm";
+import NotFound from "./NotFound"
 
 
 function App() {
@@ -11,7 +12,8 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginForm />}/>
         <Route path="/main" element={<GroceriesApp />}/>
-        
+        <Route path="*" element={<NotFound/>}/>
+
       </Routes>
     </BrowserRouter>
 
