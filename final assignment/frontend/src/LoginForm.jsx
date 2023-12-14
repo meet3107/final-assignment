@@ -1,12 +1,15 @@
 import axios from "axios"
 import { useState } from "react"
 
+
 export default function LoginUser() {
     const [formData, setFormData] = useState({
         username: "",
         password: "",
     });
     const [postResponse, setPostResponse] = useState("");
+
+   
 
     const handleOnChange = (evt) => {
         const { name, value } = evt.target;
@@ -22,7 +25,7 @@ export default function LoginUser() {
         const postUser = { ...user };
         await axios
         .post("http://localhost:3000/login", postUser)
-        .then((response) => setPostResponse(<p className="logintext">{response.data}</p>))
+        .then((response) => setPostResponse(response.data))
     };
 
     const postUser = async (evt) => {
@@ -33,6 +36,12 @@ export default function LoginUser() {
             username: "",
             password: "",
         });
+    }
+
+    const handleLogin = (message) => {
+        return message == "Successful Login"
+        ? navigate("/main") 
+        : console.log("No")
     }
     return ( 
         <div className="login">
@@ -58,12 +67,12 @@ export default function LoginUser() {
                 required
                 />
                 <br />
-                <button>Login</button>
+                <button onClick={() => handleLogin(postResponse)}>Login</button>
                 
-                <p>not a member yet? click <a href="/create-user"> here</a> to join</p>
+                <p>not a member yet? click <a href="/register"> here</a> to join</p>
                
             </form>
-            {postResponse}
+            {<p className="logintext">{postResponse}</p>}
         </div>
     );
 }
