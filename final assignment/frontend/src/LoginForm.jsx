@@ -13,7 +13,7 @@ export default function LoginUser() {
 const navigate = useNavigate();
 
 const createCookie = (Cookie) => {
-    Cookies.set("jwt-cookie", cookie)
+    Cookies.set("jwt-cookie", Cookie)
 }
    
 
