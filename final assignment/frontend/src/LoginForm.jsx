@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useState } from "react"
-
+import { useNavigate } from "react-router-dom";
 
 export default function LoginUser() {
     const [formData, setFormData] = useState({
@@ -8,7 +8,7 @@ export default function LoginUser() {
         password: "",
     });
     const [postResponse, setPostResponse] = useState("");
-
+const navigate = useNavigate();
    
 
     const handleOnChange = (evt) => {
