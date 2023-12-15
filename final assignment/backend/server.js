@@ -101,3 +101,14 @@ server.post("/login", async (request, response) => {
     }
   })
 });
+
+
+
+server.post("/addproduct", async (request, response) => {
+  const productData = request.body;
+  const newProduct = new Product(productData);
+  const saveProduct = await newProduct.save();
+  saveProduct
+    ? response.send("New product has been added")
+    : response.send("Failed to add product");
+});

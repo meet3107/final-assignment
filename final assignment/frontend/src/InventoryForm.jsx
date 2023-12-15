@@ -96,7 +96,7 @@ export default function InventoryForm({
           <p>{errors.price?.message}</p>
         </div>
 
-        <button>{toggleEdit ? "Edit Product" : "Add To Inventory"}</button>
+        {/* <button>{toggleEdit ? "Edit Product" : "Add To Inventory"}</button> */}
       </form>
     </div>
   );

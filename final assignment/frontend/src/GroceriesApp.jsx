@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import InventoryForm from "./InventoryForm";
 import axios from "axios";
 
+// import { useNavigate } from "react-router-dom";
+
 export default function GroceriesApp() {
   const [formData, setFormData] = useState({
     id: "",
@@ -14,10 +16,14 @@ export default function GroceriesApp() {
     price: "",
   });
 
+  const [toggleEdit, setToggleEdit] = useState(false);
+
+
   const [cartList, setCartList] = useState([]);
   const [products, setProducts] = useState([]);
   const [postResponse, setPostResponse] = useState("");
-  const [toggleEdit, setToggleEdit] = useState(false);
+  // const navigate = useNavigate();
+
 
   useEffect(() => {
     handleFindDB();
@@ -44,18 +50,7 @@ export default function GroceriesApp() {
       .then((response) => setPostResponse(<p>{response.data}</p>));
   };
 
-  const handleOnChange = (evt) => {
-    const fieldName = evt.target.name;
-    const fieldValue = evt.target.value;
-    console.log(fieldName);
-    setFormData((prevData) => {
-      return {
-        ...prevData,
-        id: crypto.randomUUID(),
-        [fieldName]: fieldValue,
-      };
-    });
-  };
+  
 
   const handleOnSubmit = (evt) => {
     evt.preventDefault;
@@ -94,6 +89,11 @@ export default function GroceriesApp() {
     setToggleEdit(true);
   };
 
+
+  
+
+  
+
   const handleProductDelete = async (product) => {
     const id = product._id;
     await axios
@@ -120,12 +120,9 @@ export default function GroceriesApp() {
   return (
     <>
       <h1>Groceries App</h1>
-      <InventoryForm
-        handleOnChange={handleOnChange}
-        formData={formData}
-        handleOnSubmit={handleOnSubmit}
-        toggleEdit={toggleEdit}
-      />
+      
+      
+
       {postResponse}
       <div className="GroceriesApp-Container">
         <InventoryCard
