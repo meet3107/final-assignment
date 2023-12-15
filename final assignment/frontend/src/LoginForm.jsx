@@ -2,7 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie"
-
+ 
 export default function LoginUser() {
     const [formData, setFormData] = useState({
         username: "",
@@ -11,12 +11,12 @@ export default function LoginUser() {
     const [postResponse, setPostResponse] = useState("");
     const [jwtCookie, setJwtCookie] = useState("")
 const navigate = useNavigate();
-
+ 
 const createCookie = (Cookie) => {
     Cookies.set("jwt-cookie", Cookie)
 }
    
-
+ 
     const handleOnChange = (evt) => {
         const { name, value } = evt.target;
         setFormData((prevData) => {
@@ -26,10 +26,10 @@ const createCookie = (Cookie) => {
             };
         });
     };
-
+ 
     const postToDo = async (user) => {
         const postUser = { ...user };
-        const post = await axios
+        await axios
         .post("http://localhost:3000/login", postUser)
         .then((response) => {
             setPostResponse(response.data.message)
@@ -39,8 +39,8 @@ const createCookie = (Cookie) => {
             }
         })      
     }
-  
-
+ 
+ 
     const postUser = async (evt) => {
         evt.preventDefault();
         console.log("here!");
@@ -50,39 +50,39 @@ const createCookie = (Cookie) => {
             password: "",
         });
     }
-
+ 
     const handleLogin = (message) => {
         return message == "Successful Login"
-        ? navigate("/main") 
+        ? navigate("/main")
         : console.log("No")
     }
-    return ( 
+    return (
         <div className="login">
             <h1>Groceries App</h1>
             <form action="" onSubmit={postUser}>
                 <label htmlFor="username">Username </label>
-                <input 
-                type="text" 
-                name="username" 
+                <input
+                type="text"
+                name="username"
                 id="username"
                 onChange={handleOnChange}
                 value={formData.username}
-                required 
+                required
                 />
                 <p></p>
                 <label htmlFor="password">Password </label>
-                <input 
-                type="password" 
-                name="password" 
-                id="password" 
+                <input
+                type="password"
+                name="password"
+                id="password"
                 onChange={handleOnChange}
                 value={formData.password}
                 required
                 />
                 <br />
-                {/* <button onClick={() => handleLogin(postResponse)}>Login</button> */}
-                <button>Login</button>
-                
+                <button onClick={() => handleLogin(postResponse)}>Login</button>
+ 
+               
                 <p>not a member yet? click <a href="/register"> here</a> to join</p>
                
             </form>

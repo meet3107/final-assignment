@@ -3,6 +3,7 @@ import CartList from "./CartList";
 import { useState, useEffect } from "react";
 import InventoryForm from "./InventoryForm";
 import axios from "axios";
+import {Link, useNavigate} from "react-router-dom"
 
 // import { useNavigate } from "react-router-dom";
 
@@ -120,8 +121,14 @@ export default function GroceriesApp() {
   return (
     <>
       <h1>Groceries App</h1>
-      
-      
+
+      {/* <InventoryForm
+        handleOnChange={handleOnChange}
+        formData={formData}
+        handleOnSubmit={handleOnSubmit}
+        toggleEdit={toggleEdit}
+      /> */}
+      <Link to={{pathname:"/addproduct"}}><button>Add Product</button></Link>
 
       {postResponse}
       <div className="GroceriesApp-Container">

@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import InventoryForm from "./InventoryForm";
 
+import {Link} from "react-router-dom"
+
+
 import axios from "axios";
 
 export default function AddProduct() {
@@ -85,6 +88,7 @@ export default function AddProduct() {
     await handleOnSubmit();
   };
   
+
   return (
     <>
       <h2>Add Product</h2>
@@ -96,6 +100,11 @@ export default function AddProduct() {
       />
       {postResponse}
       <button onClick={handleAddToInventory}>Add Product</button>
+
+
+      <Link to={{pathname:"/main"}}><button>Back to Inventory</button></Link>
+
+
 
       
 

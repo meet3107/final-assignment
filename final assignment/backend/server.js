@@ -9,11 +9,11 @@ require("dotenv/config");
 const port = 3000;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken")
-
+ 
 server.use(express.urlencoded({ extended: false }));
 server.use(express.json());
 server.use(cors());
-
+ 
 mongoose
   .connect(
     "mongodb+srv://admin:database1234@comp1013-cluster.elf6h5d.mongodb.net/products?retryWrites=true&w=majority"
@@ -24,16 +24,16 @@ mongoose
     });
   })
   .catch((error) => console.log(error));
-
+ 
 server.get("/", (request, response) => {
   response.send("LIVE!");
 });
-
+ 
 server.get("/products", async (request, response) => {
   const products = await Product.find();
   response.send(products);
 });
-
+ 
 server.post("/submitProduct", async (request, response) => {
   const productData = ({ id, productName, brand, quantity, image, price } =
     request.body);
@@ -45,7 +45,7 @@ server.post("/submitProduct", async (request, response) => {
     response.send("Failed!!!");
   }
 });
-
+ 
 server.delete("/products/:id", async (request, response) => {
   const { id } = request.params;
   const deleteProduct = await Product.deleteOne({
@@ -53,7 +53,7 @@ server.delete("/products/:id", async (request, response) => {
   }); //change the id from string to object id to be used by mongoDB
   deleteProduct ? response.send("Product Deleted") : response.send("FAILED!!");
 });
-
+ 
 server.patch("/products/:id", async (request, response) => {
   const { id } = request.params;
   const product = request.body;
@@ -65,9 +65,9 @@ server.patch("/products/:id", async (request, response) => {
     ? response.send(`${product.productName} product is edited`)
     : response.send("Failed to edit");
 });
-
+ 
 ////////////////user registration post
-
+ 
 server.post("/register", async (request, response) => {
   const newUser = new User({
     username: request.body.username,
@@ -78,9 +78,9 @@ server.post("/register", async (request, response) => {
     ? response.send("New user has been created")
     : response.send("failed to store new user");
 });
-
+ 
 ///////////////user verfication post
-
+ 
 server.post("/login", async (request, response) => {
   const { username, password } = request.body;
   const jwtToken = jwt.sign({id: username}, "token")
@@ -96,17 +96,19 @@ server.post("/login", async (request, response) => {
           response.send({message: "Bad username or password"});
         }
       });
-
+ 
     }
     else {
       response.send({message: "Username does not exist"})
     }
   })
 });
+ 
 
 
 
-server.post("/addproduct", async (request, response) => {
+
+server.post("/add-product", async (request, response) => {
   const productData = request.body;
   const newProduct = new Product(productData);
   const saveProduct = await newProduct.save();
