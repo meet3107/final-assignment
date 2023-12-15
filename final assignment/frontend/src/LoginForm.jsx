@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie"
 
 export default function LoginUser() {
     const [formData, setFormData] = useState({
@@ -8,7 +9,12 @@ export default function LoginUser() {
         password: "",
     });
     const [postResponse, setPostResponse] = useState("");
+    const [jwtCookie, setJwtCookie] = useState("")
 const navigate = useNavigate();
+
+const createCookie = (Cookie) => {
+    Cookies.set("jwt-cookie", Cookie)
+}
    
 
     const handleOnChange = (evt) => {
@@ -23,10 +29,17 @@ const navigate = useNavigate();
 
     const postToDo = async (user) => {
         const postUser = { ...user };
-        await axios
+        const post = await axios
         .post("http://localhost:3000/login", postUser)
-        .then((response) => setPostResponse(response.data))
-    };
+        .then((response) => {
+            setPostResponse(response.data.message)
+                    if(response.data.message == "Successful Login"){
+                const jwtCookie = createCookie(response.data.token)
+                setJwtCookie(jwtCookie)
+            }
+        })      
+    }
+  
 
     const postUser = async (evt) => {
         evt.preventDefault();
@@ -67,12 +80,14 @@ const navigate = useNavigate();
                 required
                 />
                 <br />
-                <button onClick={() => handleLogin(postResponse)}>Login</button>
+                {/* <button onClick={() => handleLogin(postResponse)}>Login</button> */}
+                <button>Login</button>
                 
                 <p>not a member yet? click <a href="/register"> here</a> to join</p>
                
             </form>
             {<p className="logintext">{postResponse}</p>}
+            {<p>{jwtCookie} </p>}
         </div>
     );
 }

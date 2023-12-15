@@ -8,6 +8,7 @@ const cors = require("cors");
 require("dotenv/config");
 const port = 3000;
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken")
 
 server.use(express.urlencoded({ extended: false }));
 server.use(express.json());
@@ -82,6 +83,7 @@ server.post("/register", async (request, response) => {
 
 server.post("/login", async (request, response) => {
   const { username, password } = request.body;
+  const jwtToken = jwt.sign({id: username}, "token")
   await User.findOne({ username }).then((user) => {
     if (user) {
       bcrypt.compare(password, user.password, (err, res) => {
@@ -89,15 +91,15 @@ server.post("/login", async (request, response) => {
           response.send(err);
         }
         if (res) {
-         response.send("Successful Login");
+         response.send({message: "Successful Login", token: jwtToken});
         } else {
-          response.send("Bad username or password");
+          response.send({message: "Bad username or password"});
         }
       });
 
     }
     else {
-      response.send("Username does not exist")
+      response.send({message: "Username does not exist"})
     }
   })
 });
