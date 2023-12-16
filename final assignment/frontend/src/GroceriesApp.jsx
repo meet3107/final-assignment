@@ -1,11 +1,10 @@
 import InventoryCard from "./InventoryCard";
 import CartList from "./CartList";
 import { useState, useEffect } from "react";
-import InventoryForm from "./InventoryForm";
+// import InventoryForm from "./InventoryForm";
 import axios from "axios";
-import {Link, useNavigate} from "react-router-dom"
+import {Link} from "react-router-dom"
 
-// import { useNavigate } from "react-router-dom";
 
 export default function GroceriesApp() {
   const [formData, setFormData] = useState({
@@ -87,7 +86,8 @@ export default function GroceriesApp() {
 
   const handleToggleEdit = (product) => {
     setFormData(product);
-    setToggleEdit(true);
+    <Link to={{pathname:"/EditProduct"}} ></Link>
+
   };
 
 
@@ -137,8 +137,8 @@ export default function GroceriesApp() {
           onClick={handleAddToCart}
           handleToggleEdit={handleToggleEdit}
           handleProductDelete={handleProductDelete}
+          handleOnSubmit={handleOnSubmit}
 
-          // newList={newProducts}
         />
         <CartList
           cartList={cartList}

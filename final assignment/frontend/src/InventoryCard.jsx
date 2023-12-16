@@ -4,8 +4,11 @@ export default function InventoryCard({
   list,
   onClick,
   handleProductDelete,
-  handleToggleEdit,
+  
 }) {
+
+
+
   return (
     <div className="Inventory-Container">
       {list.map((l) => (
@@ -22,7 +25,8 @@ export default function InventoryCard({
             {/* <button className="Edit-Button" onClick={() => handleToggleEdit(l)}>
               Edit
             </button> */}
-            <Link to={{pathname:"/EditProduct"}}><button className="Edit-Button" onClick={() => handleToggleEdit(l)}>Edit</button></Link>
+            {/* <Link to={{pathname:"/EditProduct"}}><button className="Edit-Button" onClick={() => handleToggleEdit(l)}>Edit</button></Link> */}
+            <Link to={{pathname:"/EditProduct"}}><button className="Edit-Button" >Edit</button></Link>
 
             <button
               className="Remove-Button"
