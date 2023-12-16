@@ -5,7 +5,6 @@ import LoginForm from "./LoginForm";
 
 import NotFound from "./NotFound";
 import AddProduct from "./AddProduct";
-import EditProduct from "./EditProduct";
 
 
 function App() {
@@ -18,7 +17,7 @@ function App() {
         <Route path="*" element={<NotFound/>}/>
 
         <Route path="/addproduct" element={<AddProduct/>}/>
-        <Route path="/editproduct" element={<EditProduct/>}/>
+        <Route path="/editproduct" element={<AddProduct/>}/>
 
 
 

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function InventoryCard({
   list,
   onClick,
@@ -17,9 +19,11 @@ export default function InventoryCard({
           </p>
           <button onClick={() => onClick(l)}>Add to cart</button>
           <div className="Edit-Delete-Container">
-            <button className="Edit-Button" onClick={() => handleToggleEdit(l)}>
+            {/* <button className="Edit-Button" onClick={() => handleToggleEdit(l)}>
               Edit
-            </button>
+            </button> */}
+            <Link to={{pathname:"/EditProduct"}}><button className="Edit-Button" onClick={() => handleToggleEdit(l)}>Edit</button></Link>
+
             <button
               className="Remove-Button"
               onClick={() => handleProductDelete(l)}

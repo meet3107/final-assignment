@@ -59,7 +59,6 @@ export default function AddProduct() {
   };
 
   const handleAddProduct = async (productData) => {
-    // Add logic to handle adding the product to the database
     await handlePostDB(productData);
   };
 

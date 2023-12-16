@@ -116,3 +116,23 @@ server.post("/add-product", async (request, response) => {
     ? response.send("New product has been added")
     : response.send("Failed to add product");
 });
+
+
+
+server.patch("/editproduct", (request, response) => {
+  const productId = request.params.id;
+  const updatedProduct = request.body;
+
+  Product.findByIdAndUpdate(productId, updatedProduct)
+    .then((product) => {
+      if (!product) {
+        response.send("Product not found");
+      } else {
+        response.send(`${product.productName} product is edited`);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      response.send("Internal Server Error");
+    });
+});
