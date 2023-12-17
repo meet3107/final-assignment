@@ -1,12 +1,11 @@
-// EditProduct.jsx
 import { useState, useEffect } from "react";
 import InventoryForm from "./InventoryForm";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function EditProduct() {
-  const [formData, setFormData] = useState({
-    id: "",
+  const [formData, setFormData] = useState({id: "",
     productName: "",
     brand: "",
     quantity: "",
@@ -16,24 +15,20 @@ export default function EditProduct() {
   const [postResponse, setPostResponse] = useState("");
   const [toggleEdit, setToggleEdit] = useState(false);
 
+  // useEffect(() => {
+  //     setFormData(
+  //       () => {return productData
+  //     });
+  //   }
+  
+    
+  // }, []);
+
   useEffect(() => {
-    const fetchproduct = async () => {
-      const productId = formData.id; // Assuming your formData contains the product ID
-      const response = await axios.get(`http://localhost:3000/products/${productId}`);
-      const productData = response.data;
-  
-      setFormData({
-        id: productData.id,
-        productName: productData.productName,
-        brand: productData.brand,
-        quantity: productData.quantity,
-        image: productData.image,
-        price: productData.price,
-      });
-    };
-  
-    fetchproduct()
-  }, [formData.id]);
+    setFormData(
+      productData
+    )
+  }, [])
 
 
   const handleOnChange = (evt) => {
@@ -70,6 +65,15 @@ const handleEditProduct = async (evt) => {
     setPostResponse("");
     handleEditProduct();
   };
+
+  const location = useLocation();
+  const productData = location.state;
+  console.log(productData)
+  console.log(location)
+
+
+
+
   return (
     <>
       <h2>Edit Product</h2>

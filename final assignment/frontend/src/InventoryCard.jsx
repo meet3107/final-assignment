@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import { useLocation } from "react-router-dom";
 export default function InventoryCard({
   list,
   onClick,
@@ -26,7 +26,9 @@ export default function InventoryCard({
               Edit
             </button> */}
             {/* <Link to={{pathname:"/EditProduct"}}><button className="Edit-Button" onClick={() => handleToggleEdit(l)}>Edit</button></Link> */}
-            <Link to={{pathname:"/EditProduct"}}><button className="Edit-Button" >Edit</button></Link>
+            <Link to= "/EditProduct" state= { l  }>
+  <button className="Edit-Button">Edit</button>
+</Link>
 
             <button
               className="Remove-Button"
